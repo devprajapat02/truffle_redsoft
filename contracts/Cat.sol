@@ -14,13 +14,23 @@ contract Cat is ERC20, Ownable {
     }
 
     uint256 public rewardRate = 2100;
+    uint256 public testVal = 3000;
 
     mapping(address => stakeData) public stakeHistory;
 
-    function mint(address to, uint256 amount) public onlyOwner {
+    function testRead() public pure returns (uint256) {
+        return 69;
+    }
+
+    function testWrite() public returns (uint256) {
+        testVal += 1;
+        return testVal;
+    }
+
+    function mint(uint256 amount) public {
         // convert amount ot wei
         amount = amount * 10 ** 18;
-        _mint(to, amount);
+        _mint(msg.sender, amount);
     }
 
     function burn(address from, uint256 amount) public onlyOwner {

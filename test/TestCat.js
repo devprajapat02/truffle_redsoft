@@ -5,7 +5,7 @@ contract("Cat", (accounts) => {
     it ("should be able to mint new tokens and transfer them", async () => {
         const instance = await Cat.deployed()
         const balanceBefore = await instance.balanceOf(accounts[0]) / (10 ** 18)
-        await instance.mint(accounts[0], 1)
+        await instance.mint(1)
         const balanceAfter = await instance.balanceOf(accounts[0]) / (10 ** 18)
         console.log(balanceAfter)
         assert.equal(balanceAfter - balanceBefore, 1, `Balance increased by ${balanceAfter - balanceBefore}`)
@@ -22,7 +22,7 @@ contract("Cat", (accounts) => {
 
     it ("should be able to stake and unstake tokens", async () => {
         const instance = await Cat.deployed()
-        await instance.mint(accounts[0], 5)
+        await instance.mint(5)
         await instance.stake(2)
         const balance = await instance.balanceOf(accounts[0]) / (10 ** 18)
         assert.equal(balance, 3, `Incorrect balance : ${balance}`)
